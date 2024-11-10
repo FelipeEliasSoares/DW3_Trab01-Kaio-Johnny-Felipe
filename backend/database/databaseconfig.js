@@ -7,7 +7,7 @@ const pool = new Pool({
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
 });
-akakaiakia;
+
 module.exports = {
   query: (text, params) => pool.query(text, params),
 };
