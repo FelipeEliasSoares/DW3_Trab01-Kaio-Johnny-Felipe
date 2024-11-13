@@ -1,0 +1,61 @@
+### teste de login ###
+POST http://localhost:4000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "login": "admin",
+    "senha": "admin"
+}
+
+
+### teste de buscar todas as contas ###
+GET http://localhost:4000/GetAllContas HTTP/1.1
+content-type: application/json
+
+
+### teste de buscar conta por ID ###
+POST http://localhost:4000/GetContaByID HTTP/1.1
+content-type: application/json
+
+{
+    "id":""
+}
+
+### teste de inserção de conta ###
+POST http://localhost:4000/InsertConta HTTP/1.1
+content-type: application/json
+
+
+{
+    "descricao": "Conta de luz",
+    "tipo": "Despesa",
+    "valor": 150.00,
+    "data": "2024-11-13",
+    "status": "Pendente",
+    "forma_pagamento": "Cartão de crédito",
+    "usuario_id": ""
+}
+
+### teste de atualização de conta ###
+POST http://localhost:4000/UpdateConta HTTP/1.1
+content-type: application/json
+
+
+{
+    "id": "",
+    "descricao": "Conta de luz atualizada XD XD",
+    "tipo": "Despesa",
+    "valor": 160.00,
+    "data": "2024-11-14",
+    "status": "Paga",
+    "forma_pagamento": "Débito",
+    "usuario_id":""
+}
+
+### teste de exclusão de conta ###
+POST http://localhost:4000/DeleteConta HTTP/1.1
+content-type: application/json
+
+{
+    "id": ""
+}

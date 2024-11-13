@@ -5,10 +5,10 @@ const { serialize } = require("cookie");
 
 const Login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { login, senha } = req.body;
 
     // Busca as credenciais do usuário no banco de dados
-    const credencial = await mdlLogin.GetCredencial(username);
+    const credencial = await mdlLogin.GetCredencial(login);
 
     if (!credencial || credencial.length === 0) {
       return res.status(403).json({ message: "Usuário não identificado!" });
@@ -16,15 +16,15 @@ const Login = async (req, res) => {
 
     // Verifica a senha
     const ispasswordValid = bcrypt.compareSync(
-      password,
-      credencial[0].password
+      senha,
+      credencial[0].senha
     );
     if (!ispasswordValid) {
       return res.status(403).json({ message: "Login inválido!" });
     }
 
     // Gera o token JWT
-    const token = jwt.sign({ username }, process.env.SECRET_API, {
+    const token = jwt.sign({ login }, process.env.SECRET_API, {
       expiresIn: 120 * 60, // Expira em 2 horas
     });
 
@@ -88,7 +88,7 @@ const Me = (req, res) => {
       }
 
       // Aqui você pode buscar mais dados do usuário no banco de dados se necessário
-      const user = { username: decoded.username };
+      const user = { login: decoded.login };
 
       return res.status(200).json({ user });
     });
