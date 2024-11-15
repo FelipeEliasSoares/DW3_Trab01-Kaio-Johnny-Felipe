@@ -6,7 +6,8 @@ CREATE TABLE usuario (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     login VARCHAR(50) NOT NULL,
-    senha VARCHAR(255) NOT NULL
+    senha VARCHAR(255) NOT NULL,
+    removido BOOLEAN DEFAULT FALSE
 );
 
 -- Inserção de dados na tabela usuario com senha criptografada
