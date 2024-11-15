@@ -1,7 +1,6 @@
 //* use client para rodar no browser do usuário
 "use client";
 
-//* Importando os hooks necessários do react e do next
 import {
   createContext,
   useContext,
@@ -9,14 +8,8 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-
-//* Importando o hook useRouter do next para redirecionar o usuário
 import { useRouter } from "next/navigation";
-
-//* Importando o axios para fazer requisições HTTP
 import axios from "axios";
-
-//* Importando os tipos de dados
 import { User, AuthContextType } from "./types/types";
 
 const AuthContext = createContext<AuthContextType>({
@@ -33,7 +26,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Efeito para verificar a sessão do usuário
   useEffect(() => {
     const checkUser = async () => {
       setLoading(true);
@@ -60,16 +52,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const { data }: { data: { auth: boolean } } = await axios.post(
         "http://localhost:4000/login",
         { username, password },
-        { withCredentials: true } // Inclui cookies nas requisições
+        { withCredentials: true }
       );
 
       if (data.auth) {
-        // Após o login, buscar os dados do usuário
         const { data: userData }: { data: { user: User } } = await axios.get(
           "http://localhost:4000/api/auth/me",
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         setUser(userData.user);
         router.push("/dashboard");
@@ -90,8 +79,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         {},
         { withCredentials: true }
       );
-      setUser(null);
-      router.push("/login"); // Redirecionar após logout
+      setUser(null); // Limpa o estado do usuário
+      router.replace("/"); // Redireciona para a página de login (raiz)
     } catch (error) {
       console.error("Erro ao fazer logout", error);
     } finally {

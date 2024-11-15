@@ -16,7 +16,7 @@ export function withAuth(Component: React.ComponentType) {
 
     useEffect(() => {
       if (!loading && !user) {
-        router.push("/login");
+        router.push("/");
       }
     }, [user, loading, router]);
 

@@ -3,6 +3,8 @@ const routerApp = express.Router();
 
 const appLogin = require("../apps/login/controller/ctlLogin");
 const appContas = require("../apps/contas/controller/ctlContas");
+const appUsuarios = require("../apps/usuarios/controller/ctlUsuarios");
+
 // middleware that is specific to this router
 routerApp.use((req, res, next) => {
   next();
@@ -24,6 +26,7 @@ routerApp.post("/InsertConta", appContas.InsertConta);
 routerApp.put("/UpdateConta/:id", appContas.UpdateConta);
 routerApp.delete("/DeleteConta/:id", appContas.DeleteConta);
 
+
 //Rota Contas
 //routerApp.get("/GetAllContas", appLogin.Me, appContas.GetAllContas);
 //routerApp.post("/GetContaByID", appLogin.Me, appContas.GetContaByID);
@@ -31,4 +34,20 @@ routerApp.delete("/DeleteConta/:id", appContas.DeleteConta);
 //routerApp.post("/UpdateConta", appLogin.Me, appContas.UpdateConta);
 //routerApp.post("/DeleteConta", appLogin.Me, appContas.DeleteConta);
 
+// Rota Usuarios
+routerApp.get("/GetAllUsuarios", appUsuarios.GetAllUsuarios);
+routerApp.get("/GetUsuarioByID/:id", appUsuarios.GetUsuarioByID);
+routerApp.post("/InsertUsuario", appUsuarios.InsertUsuario);
+routerApp.post("/UpdateUsuario/:id", appUsuarios.UpdateUsuario);
+routerApp.delete("/DeleteUsuario/:id", appUsuarios.DeleteUsuario);
+
+//routerApp.get("/GetAllUsuarios", appLogin.Me, appUsuarios.GetAllUsuarios);
+//routerApp.post("/GetUsuarioByID", appLogin.Me, appUsuarios.GetUsuarioByID);
+//routerApp.post("/InsertConta", appLogin.Me, appUsuarios.InsertUsuario);
+//routerApp.post("/UpdateConta", appLogin.Me, appUsuarios.UpdateUsuario);
+//routerApp.post("/DeleteUsuario", appLogin.Me, appUsuarios.DeleteUsuario);
+
+
 module.exports = routerApp;
+
+
