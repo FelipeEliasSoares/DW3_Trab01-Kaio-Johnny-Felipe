@@ -1,10 +1,9 @@
 const express = require("express");
 const routerApp = express.Router();
 
-const appAlunos = require("../apps/alunos/controller/ctlAlunos");
-const appCursos = require("../apps/cursos/controller/ctlCursos");
 const appLogin = require("../apps/login/controller/ctlLogin");
-
+const appContas = require("../apps/contas/controller/ctlContas");
+const appUsuarios = require("../apps/usuarios/controller/ctlUsuarios");
 // middleware that is specific to this router
 routerApp.use((req, res, next) => {
   next();
@@ -14,22 +13,37 @@ routerApp.get("/", (req, res) => {
   res.send("Olá mundo!");
 });
 
-//Rotas de Alunos
-routerApp.get("/getAllAlunos", appLogin.AutenticaJWT, appAlunos.getAllAlunos);
-routerApp.post("/getAlunoByID", appLogin.AutenticaJWT, appAlunos.getAlunoByID);
-routerApp.post("/insertAlunos", appLogin.AutenticaJWT, appAlunos.insertAlunos);
-routerApp.post("/updateAlunos", appLogin.AutenticaJWT, appAlunos.updateAlunos);
-routerApp.post("/DeleteAlunos", appLogin.AutenticaJWT, appAlunos.DeleteAlunos);
-
-//Rotas de Cursos
-routerApp.get("/GetAllCursos", appLogin.AutenticaJWT, appCursos.GetAllCursos);
-routerApp.post("/GetCursoByID", appLogin.AutenticaJWT, appCursos.GetCursoByID);
-routerApp.post("/InsertCursos", appLogin.AutenticaJWT, appCursos.InsertCursos);
-routerApp.post("/UpdateCursos", appLogin.AutenticaJWT, appCursos.UpdateCursos);
-routerApp.post("/DeleteCursos", appLogin.AutenticaJWT, appCursos.DeleteCursos);
-
 // Rota Login
-routerApp.post("/Login", appLogin.Login);
-routerApp.post("/Logout", appLogin.Logout);
+routerApp.post("/login", appLogin.Login);
+routerApp.post("/logout", appLogin.Logout);
+routerApp.get("/api/auth/me", appLogin.Me);
+
+//Rota para testar
+routerApp.get("/GetAllContas", appContas.GetAllContas);
+routerApp.post("/GetContaByID", appContas.GetContaByID);
+routerApp.post("/InsertConta", appContas.InsertConta);
+routerApp.post("/UpdateConta", appContas.UpdateConta);
+routerApp.post("/DeleteConta", appContas.DeleteConta);
+
+//Rota Contas
+//routerApp.get("/GetAllContas", appLogin.Me, appContas.GetAllContas);
+//routerApp.post("/GetContaByID", appLogin.Me, appContas.GetContaByID);
+//routerApp.post("/InsertConta", appLogin.Me, appContas.InsertConta);
+//routerApp.post("/UpdateConta", appLogin.Me, appContas.UpdateConta);
+//routerApp.post("/DeleteConta", appLogin.Me, appContas.DeleteConta);
+
+routerApp.get("/GetAllUsuarios", appUsuarios.GetAllUsuarios);
+routerApp.get("/GetUsuarioByID/:id", appUsuarios.GetUsuarioByID);
+routerApp.post("/InsertUsuario", appUsuarios.InsertUsuario);
+routerApp.post("/UpdateUsuario/:id", appUsuarios.UpdateUsuario);
+routerApp.delete("/DeleteUsuario/:id", appUsuarios.DeleteUsuario);
+
+//routerApp.get("/GetAllUsuarios", appLogin.Me, appUsuarios.GetAllUsuarios);
+//routerApp.post("/GetUsuarioByID", appLogin.Me, appUsuarios.GetUsuarioByID);
+//routerApp.post("/InsertConta", appLogin.Me, appUsuarios.InsertUsuario);
+//routerApp.post("/UpdateConta", appLogin.Me, appUsuarios.UpdateUsuario);
+//routerApp.post("/DeleteUsuario", appLogin.Me, appUsuarios.DeleteUsuario);
 
 module.exports = routerApp;
+
+
