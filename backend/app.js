@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-//@ Utiliza o routerApp configurado em ./routes/route.js
+//@ Utiliza o routerApp configurado em ./routes/router.js
 app.use(router);
 
 app.listen(port, () => {
