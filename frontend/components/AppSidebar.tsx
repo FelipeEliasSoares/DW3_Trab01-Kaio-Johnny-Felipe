@@ -1,7 +1,5 @@
-//* Importando icones do lucide-react
+//* Importando ícones do lucide-react
 import { LogOut, CreditCard } from "lucide-react";
-
-//* Importando componentes do shacdn/ui/sidebar
 import {
   Sidebar,
   SidebarContent,
@@ -13,15 +11,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-//* Importando o hook useAuth
 import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 export function AppSidebar() {
   const { logout } = useAuth();
 
   return (
-    <Sidebar>
+    <Sidebar className="w-64 h-screen shadow-md bg-white">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>ERP Modulo Financeiro</SidebarGroupLabel>
@@ -30,13 +27,13 @@ export function AppSidebar() {
               {/* Item único "Conta de Pagamento" */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a
-                    href="/dashboard/conta-pagamento"
+                  <Link
+                    href="/dashboard/conta"
                     className="flex items-center space-x-2"
                   >
                     <CreditCard />
                     <span>Conta de Pagamento</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
