@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const mdlLogin = require("../model/mdlLogin"); // Supondo que este modelo esteja correto
+const mdlLogin = require("../model/mdlLogin"); // Certifique-se de que o caminho está correto
 const { serialize } = require("cookie");
 
+// Controlador para Login
 const Login = async (req, res) => {
   try {
     const { login, senha } = req.body;
@@ -15,18 +16,19 @@ const Login = async (req, res) => {
     }
 
     // Verifica a senha
-    const ispasswordValid = bcrypt.compareSync(
-      senha,
-      credencial[0].senha
-    );
+    const ispasswordValid = bcrypt.compareSync(senha, credencial[0].senha);
     if (!ispasswordValid) {
       return res.status(403).json({ message: "Login inválido!" });
     }
 
-    // Gera o token JWT
-    const token = jwt.sign({ login }, process.env.SECRET_API, {
-      expiresIn: 120 * 60, // Expira em 2 horas
-    });
+    // Gera o token JWT incluindo o 'id' do usuário
+    const token = jwt.sign(
+      { id: credencial[0].id, login }, // Agora credencial[0].id está definido
+      process.env.SECRET_API,
+      {
+        expiresIn: 120 * 60, // Expira em 2 horas
+      }
+    );
 
     // Define o token em um cookie HttpOnly
     res.setHeader(
@@ -47,6 +49,7 @@ const Login = async (req, res) => {
   }
 };
 
+// Controlador para Logout
 const Logout = (req, res) => {
   try {
     // Limpa o cookie auth_token
@@ -70,32 +73,13 @@ const Logout = (req, res) => {
   }
 };
 
+// Controlador para 'Me'
 const Me = (req, res) => {
-  try {
-    const token = req.cookies.auth_token;
-
-    if (!token) {
-      return res
-        .status(403)
-        .json({ auth: false, message: "Token JWT não fornecido" });
-    }
-
-    jwt.verify(token, process.env.SECRET_API, (err, decoded) => {
-      if (err) {
-        return res
-          .status(403)
-          .json({ auth: false, message: "Token JWT inválido ou expirado" });
-      }
-
-      // Aqui você pode buscar mais dados do usuário no banco de dados se necessário
-      const user = { login: decoded.login };
-
-      return res.status(200).json({ user });
-    });
-  } catch (error) {
-    console.error("Erro no me:", error);
-    return res.status(500).json({ message: "Erro interno do servidor" });
+  if (!req.user) {
+    return res.status(401).json({ message: "Usuário não autenticado." });
   }
+
+  res.json({ user: req.user });
 };
 
 module.exports = {
