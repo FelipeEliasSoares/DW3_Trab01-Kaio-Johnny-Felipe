@@ -14,7 +14,7 @@ content-type: application/json
 
 
 ### teste de buscar conta por ID ###
-GET http://localhost:4000/contas/e356a463-f333-4102-a1a5-c380b7360b90 HTTP/1.1
+GET http://localhost:4000/contas/7100dd4b-a1c2-4d80-a9eb-3686f7def325 HTTP/1.1
 content-type: application/json
 
 
@@ -30,12 +30,12 @@ content-type: application/json
     "data": "2024-11-13",
     "status": "Pendente",
     "forma_pagamento": "Cartão de crédito",
-    "usuario_id": "e4acfa25-9943-40cf-8612-c97144e41bd8"
+    "usuario_id": "bcd2bf3e-a355-4d01-b320-8f35ca96f525"
 
 }
 
 ### teste de atualização de conta ###
-Put http://localhost:4000/UpdateConta/e356a463-f333-4102-a1a5-c380b7360b90 HTTP/1.1
+Put http://localhost:4000/contas/c1ae01a9-37a0-4062-a51a-0a1c5854ab27 HTTP/1.1
 content-type: application/json
 
 
@@ -46,10 +46,10 @@ content-type: application/json
     "data": "2024-11-14",
     "status": "Paga",
     "forma_pagamento": "Débito",
-    "usuario_id":"f9ad9a44-bf41-4c64-ba34-0e21bb162c78"
+    "usuario_id":"bcd2bf3e-a355-4d01-b320-8f35ca96f525"
 }
 
 ### teste de exclusão de conta ###
-delete http://localhost:4000/DeleteConta/dfd1dece-67e6-4486-b46d-cf3440239afa HTTP/1.1
+delete http://localhost:4000/contas/c1ae01a9-37a0-4062-a51a-0a1c5854ab27 HTTP/1.1
 content-type: application/json
 
