@@ -1,10 +1,7 @@
 const jwt = require("jsonwebtoken");
 const mdlLogin = require("../login/model/mdlLogin");
-const { promisify } = require("util");
 
-const verifyAsync = promisify(jwt.verify);
-
-const Me = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const token = req.cookies.auth_token;
 
@@ -14,8 +11,8 @@ const Me = async (req, res, next) => {
         .json({ auth: false, message: "Token JWT não fornecido" });
     }
 
-    // Verifica e decodifica o token JWT
-    const decoded = await verifyAsync(token, process.env.SECRET_API);
+    // Decodifica o token JWT
+    const decoded = jwt.verify(token, process.env.SECRET_API);
 
     const usuario = await mdlLogin.GetUsuarioById(decoded.id);
 
@@ -25,10 +22,10 @@ const Me = async (req, res, next) => {
         .json({ auth: false, message: "Usuário não encontrado" });
     }
 
+    // Adiciona os dados do usuário ao objeto req
     req.user = usuario;
 
-    //middleware/controlador
-    next();
+    next(); // Prossegue para o próximo middleware ou controlador
   } catch (error) {
     if (
       error.name === "TokenExpiredError" ||
@@ -38,9 +35,9 @@ const Me = async (req, res, next) => {
         .status(403)
         .json({ auth: false, message: "Token JWT inválido ou expirado" });
     }
-    console.error("Erro no middleware 'Me':", error);
+    console.error("Erro no middleware 'authMiddleware':", error);
     return res.status(500).json({ message: "Erro interno do servidor" });
   }
 };
 
-module.exports = Me;
+module.exports = authMiddleware;
