@@ -22,6 +22,7 @@ CREATE TABLE usuario (
     email VARCHAR(255) NOT NULL,
     login VARCHAR(50) NOT NULL,
     senha VARCHAR(255) NOT NULL
+    removido BOOLEAN DEFAULT FALSE
 );
 
     Inserção de dados de exemplo na tabela usuario: A senha é criptografada usando o algoritmo bcrypt.
@@ -43,7 +44,8 @@ CREATE TABLE conta (
     data DATE NOT NULL,
     status VARCHAR(50) NOT NULL,
     forma_pagamento VARCHAR(50) NOT NULL,
-    usuario_id UUID NOT NULL, 
+    usuario_id UUID NOT NULL,
+    removido BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 ```
