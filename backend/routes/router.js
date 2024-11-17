@@ -34,17 +34,5 @@ routerApp.post("/usuarios", Me, appUsuarios.InsertUsuario);
 routerApp.put("/usuarios/:id", Me, appUsuarios.UpdateUsuario);
 routerApp.delete("/usuarios/:id", Me, appUsuarios.DeleteUsuario);
 
-// Rotas comentadas podem ser removidas se não forem necessárias
-//routerApp.get("/GetAllContas", appLogin.Me, appContas.GetAllContas);
-//routerApp.post("/GetContaByID", appLogin.Me, appContas.GetContaByID);
-//routerApp.post("/InsertConta", appLogin.Me, appContas.InsertConta);
-//routerApp.post("/UpdateConta", appLogin.Me, appContas.UpdateConta);
-//routerApp.post("/DeleteConta", appLogin.Me, appContas.DeleteConta);
-
-//routerApp.get("/GetAllUsuarios", appLogin.Me, appUsuarios.GetAllUsuarios);
-//routerApp.post("/GetUsuarioByID", appLogin.Me, appUsuarios.GetUsuarioByID);
-//routerApp.post("/InsertConta", appLogin.Me, appUsuarios.InsertUsuario);
-//routerApp.post("/UpdateConta", appLogin.Me, appUsuarios.UpdateUsuario);
-//routerApp.post("/DeleteUsuario", appLogin.Me, appUsuarios.DeleteUsuario);
 
 module.exports = routerApp;
