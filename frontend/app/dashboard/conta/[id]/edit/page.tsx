@@ -23,14 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ArrowLeft, Save, AlertCircle } from "lucide-react";
 
 // Função auxiliar para formatar a data
 const formatDateForInput = (isoDate: string) => {
   if (!isoDate) return "";
-  return isoDate.split("T")[0]; // Pega apenas a parte YYYY-MM-DD da data ISO
+  return isoDate.split("T")[0];
 };
 
 export default function EditRegistroPage() {
@@ -66,7 +65,7 @@ export default function EditRegistroPage() {
         descricao: conta.descricao,
         tipo: conta.tipo,
         valor: conta.valor,
-        data: formatDateForInput(conta.data), // Formata a data aqui
+        data: formatDateForInput(conta.data),
         status: conta.status,
         forma_pagamento: conta.forma_pagamento,
       });
@@ -75,10 +74,9 @@ export default function EditRegistroPage() {
 
   const handleSave = async () => {
     try {
-      // Aqui podemos garantir que a data está no formato correto antes de enviar
       const dataToSend = {
         ...formData,
-        data: formData.data + "T00:00:00.000Z", // Adiciona o tempo à data se necessário
+        data: formData.data + "T00:00:00.000Z",
       };
       await updateConta(id, dataToSend);
       router.push("/dashboard/conta");
@@ -86,8 +84,6 @@ export default function EditRegistroPage() {
       console.error("Failed to update:", error);
     }
   };
-
-  // ... resto do código permanece igual ...
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

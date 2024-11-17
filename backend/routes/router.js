@@ -1,4 +1,3 @@
-// routes/router.js
 const express = require("express");
 const routerApp = express.Router();
 
@@ -7,7 +6,6 @@ const appContas = require("../apps/contas/controller/ctlContas");
 const Me = require("../apps/middleware/auth");
 const appUsuarios = require("../apps/usuarios/controller/ctlUsuarios");
 
-// Middleware que é específico para este router (pode ser removido se não necessário)
 routerApp.use((req, res, next) => {
   next();
 });

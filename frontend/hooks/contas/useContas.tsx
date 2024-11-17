@@ -97,7 +97,7 @@ export const useInsertConta = () => {
 
 // Hook para atualizar uma conta existente
 export const useUpdateConta = () => {
-  const { user } = useAuth(); // Acessa o usuário atual
+  const { user } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -109,7 +109,7 @@ export const useUpdateConta = () => {
 
     try {
       setLoading(true);
-      const dataWithUser = { ...updatedConta, usuario_id: user.id }; // Inclui o usuario_id
+      const dataWithUser = { ...updatedConta, usuario_id: user.id };
       const response = await api.put<Conta>(`/contas/${id}`, dataWithUser);
       setError(null);
       return response.data;

@@ -10,7 +10,7 @@ const GetCredencial = async (loginPar) => {
 
 // Método para buscar o usuário completo pelo ID
 const GetUsuarioById = async (id) => {
-  const query = "SELECT * FROM usuario WHERE id = $1"; // Certifique-se de que o nome da tabela é 'usuario'
+  const query = "SELECT * FROM usuario WHERE id = $1";
   const values = [id];
 
   try {

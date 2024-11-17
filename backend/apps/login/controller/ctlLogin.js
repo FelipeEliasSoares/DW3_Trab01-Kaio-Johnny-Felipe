@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const mdlLogin = require("../model/mdlLogin"); // Certifique-se de que o caminho está correto
+const mdlLogin = require("../model/mdlLogin");
 const { serialize } = require("cookie");
 
 // Controlador para Login
@@ -23,14 +23,14 @@ const Login = async (req, res) => {
 
     // Gera o token JWT incluindo o 'id' do usuário
     const token = jwt.sign(
-      { id: credencial[0].id, login }, // Agora credencial[0].id está definido
+      { id: credencial[0].id, login },
       process.env.SECRET_API,
       {
         expiresIn: 120 * 60, // Expira em 2 horas
       }
     );
 
-    // Define o token em um cookie HttpOnly
+    // Define o token em um cookie
     res.setHeader(
       "Set-Cookie",
       serialize("auth_token", token, {

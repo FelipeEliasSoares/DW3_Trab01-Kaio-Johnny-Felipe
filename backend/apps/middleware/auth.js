@@ -16,7 +16,7 @@ const Me = async (req, res, next) => {
 
     // Verifica e decodifica o token JWT
     const decoded = await verifyAsync(token, process.env.SECRET_API);
-    // Busca o usuário completo no banco de dados usando o ID
+
     const usuario = await mdlLogin.GetUsuarioById(decoded.id);
 
     if (!usuario) {
@@ -25,10 +25,9 @@ const Me = async (req, res, next) => {
         .json({ auth: false, message: "Usuário não encontrado" });
     }
 
-    // Anexa o usuário completo à requisição
     req.user = usuario;
 
-    // Passa o controle para o próximo middleware/controlador
+    //middleware/controlador
     next();
   } catch (error) {
     if (

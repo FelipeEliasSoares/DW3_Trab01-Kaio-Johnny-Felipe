@@ -1,11 +1,10 @@
-// server.js
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const router = require("./routes/router"); // Caminho para o arquivo de rotas
+const router = require("./routes/router");
 
 const app = express();
 const port = 4000;
@@ -26,7 +25,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Utiliza as rotas configuradas em ./routes/router.js
 app.use(router);
 
 // Middleware para lidar com rotas não definidas
