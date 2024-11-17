@@ -8,11 +8,11 @@ content-type: application/json
 }
 
 ### todas os usuarios não deletados ###
-GET http://localhost:4000/GetAllUsuarios HTTP/1.1
+GET http://localhost:4000/usuarios HTTP/1.1
 content-type: application/json
 
 ####teste de pegar usuario por ID ####
-get http://localhost:4000/GetUsuarioByID/1e1430e2-2554-44a4-9016-02e049ed422d HTTP/1.1
+get http://localhost:4000/usuarios/1e1430e2-2554-44a4-9016-02e049ed422d HTTP/1.1
 content-type: application/json
 
 ####teste de inserção de usuario ####

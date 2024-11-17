@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const mdlLogin = require("../model/mdlLogin"); // Supondo que este modelo esteja correto
+const mdlLogin = require("../model/mdlLogin");
 const { serialize } = require("cookie");
 
+// Controlador para Login
 const Login = async (req, res) => {
   try {
     const { login, senha } = req.body;
@@ -15,20 +16,24 @@ const Login = async (req, res) => {
     }
 
     // Verifica a senha
-    const ispasswordValid = bcrypt.compareSync(
-      senha,
-      credencial[0].senha
-    );
+    const ispasswordValid = bcrypt.compareSync(senha, credencial[0].senha);
+
     if (!ispasswordValid) {
       return res.status(403).json({ message: "Login inválido!" });
     }
 
-    // Gera o token JWT
-    const token = jwt.sign({ login }, process.env.SECRET_API, {
-      expiresIn: 120 * 60, // Expira em 2 horas
-    });
+    // Gera o token JWT incluindo o 'id' do usuário
+    const token = jwt.sign(
+      { id: credencial[0].id, login },
+      process.env.SECRET_API,
+      {
+        expiresIn: 120 * 60, // Expira em 2 horas
+      }
+    );
 
-    // Define o token em um cookie HttpOnly
+
+
+    // Define o token em um cookie
     res.setHeader(
       "Set-Cookie",
       serialize("auth_token", token, {
@@ -47,6 +52,7 @@ const Login = async (req, res) => {
   }
 };
 
+// Controlador para Logout
 const Logout = (req, res) => {
   try {
     // Limpa o cookie auth_token
@@ -70,7 +76,12 @@ const Logout = (req, res) => {
   }
 };
 
+// Controlador para 'Me'
 const Me = (req, res) => {
+
+  if (!req.user) {
+    return res.status(401).json({ message: "Usuário não autenticado." });
+
   try {
     const token = req.cookies.auth_token;
 
@@ -93,9 +104,10 @@ const Me = (req, res) => {
       return res.status(200).json({ user });
     });
   } catch (error) {
-    console.error("Erro no me:", error);
     return res.status(500).json({ message: "Erro interno do servidor" });
   }
+
+  res.json({ user: req.user });
 };
 
 module.exports = {
