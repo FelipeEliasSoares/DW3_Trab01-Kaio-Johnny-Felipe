@@ -1,3 +1,4 @@
+//* Arquivo responsável pelas funções de acesso ao BD
 const db = require("../../../database/databaseconfig");
 
 // Função para obter todas as contas
@@ -11,12 +12,8 @@ const GetAllContas = async () => {
 
 // Função para obter uma conta por ID no BD
 const GetContaByID = async (contaIDPar) => {
-  return (
-    await db.query(
-      "SELECT * FROM conta WHERE id = $1",
-      [contaIDPar]
-    )
-  ).rows;
+  return (await db.query("SELECT * FROM conta WHERE id = $1", [contaIDPar]))
+    .rows;
 };
 
 // Função para inserir uma nova conta no BD
@@ -36,7 +33,7 @@ const InsertConta = async (registroPar) => {
           registroPar.data,
           registroPar.status,
           registroPar.forma_pagamento,
-          registroPar.usuario_id
+          registroPar.usuario_id,
         ]
       )
     ).rowCount;
@@ -91,10 +88,9 @@ const DeleteConta = async (registroPar) => {
 
   try {
     linhasAfetadas = (
-      await db.query(
-        "UPDATE conta SET removido = TRUE WHERE id = $1",
-        [registroPar.id]
-      )
+      await db.query("UPDATE conta SET removido = TRUE WHERE id = $1", [
+        registroPar.id,
+      ])
     ).rowCount;
   } catch (error) {
     msg = "[mdlConta|DeleteConta] " + error.detail;
@@ -103,7 +99,6 @@ const DeleteConta = async (registroPar) => {
 
   return { msg, linhasAfetadas };
 };
-
 
 module.exports = {
   GetAllContas,

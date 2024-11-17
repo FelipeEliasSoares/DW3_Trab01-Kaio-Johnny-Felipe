@@ -1,6 +1,11 @@
+//* Importa o JWT e o Bcrypt
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
+//* Importa o modelo de login
 const mdlLogin = require("../model/mdlLogin");
+
+//* Importa a função 'serialize' do módulo 'cookie'
 const { serialize } = require("cookie");
 
 // Controlador para Login
@@ -30,8 +35,6 @@ const Login = async (req, res) => {
         expiresIn: 120 * 60, // Expira em 2 horas
       }
     );
-
-
 
     // Define o token em um cookie
     res.setHeader(

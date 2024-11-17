@@ -1,3 +1,4 @@
+//* Importando o módulo de conexão com o banco de dados
 const db = require("../../../database/databaseconfig");
 
 const GetCredencial = async (loginPar) => {

@@ -1,3 +1,4 @@
+//* Importa o modelo de usuários
 const mdlUsuario = require("../model/mdlUsuarios");
 
 // Função para obter todas as contas
