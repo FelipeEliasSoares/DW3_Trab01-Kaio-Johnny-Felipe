@@ -78,36 +78,18 @@ const Logout = (req, res) => {
 
 // Controlador para 'Me'
 const Me = (req, res) => {
-
-  if (!req.user) {
-    return res.status(401).json({ message: "Usuário não autenticado." });
-
   try {
-    const token = req.cookies.auth_token;
+    // Usa as informações adicionadas pelo middleware
+    const { id, login } = req.user;
 
-    if (!token) {
-      return res
-        .status(403)
-        .json({ auth: false, message: "Token JWT não fornecido" });
-    }
-
-    jwt.verify(token, process.env.SECRET_API, (err, decoded) => {
-      if (err) {
-        return res
-          .status(403)
-          .json({ auth: false, message: "Token JWT inválido ou expirado" });
-      }
-
-      // Aqui você pode buscar mais dados do usuário no banco de dados se necessário
-      const user = { login: decoded.login };
-
-      return res.status(200).json({ user });
+    return res.status(200).json({
+      user: { id, login },
+      message: "Informações do usuário retornadas com sucesso.",
     });
   } catch (error) {
+    console.error("Erro no controlador 'Me':", error);
     return res.status(500).json({ message: "Erro interno do servidor" });
   }
-
-  res.json({ user: req.user });
 };
 
 module.exports = {
