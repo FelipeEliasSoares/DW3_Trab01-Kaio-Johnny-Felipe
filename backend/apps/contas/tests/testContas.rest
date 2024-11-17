@@ -9,17 +9,17 @@ content-type: application/json
 
 
 ### teste de buscar todas as contas ###
-GET http://localhost:4000/GetAllContas HTTP/1.1
+GET http://localhost:4000/contas HTTP/1.1
 content-type: application/json
 
 
 ### teste de buscar conta por ID ###
-GET http://localhost:4000/GetContaByID/e356a463-f333-4102-a1a5-c380b7360b90 HTTP/1.1
+GET http://localhost:4000/contas/e356a463-f333-4102-a1a5-c380b7360b90 HTTP/1.1
 content-type: application/json
 
 
 ### teste de inserção de conta ###
-POST http://localhost:4000/InsertConta HTTP/1.1
+POST http://localhost:4000/contas HTTP/1.1
 content-type: application/json
 
 {
@@ -29,7 +29,7 @@ content-type: application/json
     "data": "2024-11-13",
     "status": "Pendente",
     "forma_pagamento": "Cartão de crédito",
-    "usuario_id": "f9ad9a44-bf41-4c64-ba34-0e21bb162c78"
+    "usuario_id": "e4acfa25-9943-40cf-8612-c97144e41bd8"
 }
 
 ### teste de atualização de conta ###

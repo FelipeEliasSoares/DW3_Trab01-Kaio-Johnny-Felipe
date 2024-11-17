@@ -1,4 +1,3 @@
-//* use client para rodar no browser do usuário
 "use client";
 
 import {
@@ -36,6 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             withCredentials: true,
           }
         );
+
         setUser(data.user);
       } catch {
         setUser(null);
@@ -46,12 +46,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkUser();
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (login: string, senha: string) => {
     setLoading(true);
     try {
       const { data }: { data: { auth: boolean } } = await axios.post(
         "http://localhost:4000/login",
-        { username, password },
+        { login, senha },
         { withCredentials: true }
       );
 
@@ -79,8 +79,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         {},
         { withCredentials: true }
       );
-      setUser(null); // Limpa o estado do usuário
-      router.replace("/"); // Redireciona para a página de login (raiz)
+      setUser(null);
+      router.replace("/");
     } catch (error) {
       console.error("Erro ao fazer logout", error);
     } finally {
