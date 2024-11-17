@@ -4,7 +4,7 @@ const db = require("../../../database/databaseconfig");
 const GetAllContas = async () => {
   return (
     await db.query(
-      "SELECT * " + "FROM conta ORDER BY descricao ASC"
+      "SELECT * " + "FROM conta where removido IS NOT TRUE ORDER BY id ASC"
     )
   ).rows;
 };
@@ -72,7 +72,7 @@ const UpdateConta = async (registroPar) => {
           registroPar.data,
           registroPar.status,
           registroPar.forma_pagamento,
-          registroPar.usuario_id
+          registroPar.usuario_id,
         ]
       )
     ).rowCount;
@@ -92,7 +92,7 @@ const DeleteConta = async (registroPar) => {
   try {
     linhasAfetadas = (
       await db.query(
-        "DELETE FROM conta WHERE id = $1",
+        "UPDATE conta SET removido = TRUE WHERE id = $1",
         [registroPar.id]
       )
     ).rowCount;
