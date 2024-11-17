@@ -1,5 +1,10 @@
+//* Importações de bibliotecas do React
 import { useState, useEffect, useCallback } from "react";
+
+//* Importação da biblioteca de requisições
 import api from "../../lib/api";
+
+//* Importação dos tipos de dados
 import {
   Conta,
   CreateContaInput,
@@ -8,6 +13,7 @@ import {
   GetContaByIdResponse,
 } from "../contas/types/types";
 
+//* Hook para obter todas as contas
 import { useAuth } from "../../context/AuthContext";
 
 // Hook para obter todas as contas

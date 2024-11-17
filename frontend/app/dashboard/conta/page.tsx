@@ -1,15 +1,25 @@
 "use client";
 
+//* Importando os hooks do react
 import { useState, useMemo, useCallback, useTransition } from "react";
+
+//* Importando o hook de Link do next
 import Link from "next/link";
+
+//* Importando os hooks de contas
 import {
   useGetAllContas,
   useInsertConta,
   useDeleteConta,
 } from "../../../hooks/contas/useContas";
+
+//* Importando os types de contas
 import { Conta, CreateContaInput } from "../../../hooks/contas/types/types";
+
+//* Importando utilitários
 import { cn } from "@/lib/utils";
 
+//* Importando os componentes de UI
 import {
   Table,
   TableBody,
@@ -18,6 +28,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+//* Importando os componentes de UI
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -44,8 +56,11 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+
+//* Importando os ícones
 import { Trash, Eye, Edit, Search, Plus, AlertCircle } from "lucide-react";
 
+//* Definindo a quantidade de registros por página
 const ITEMS_PER_PAGE = 10;
 
 export default function ContaPage() {
@@ -67,7 +82,7 @@ export default function ContaPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Memoized filtered and paginated records
+  // Memorizando os registros paginados e o total de páginas
   const { paginatedRecords, totalPages } = useMemo(() => {
     const filtered = contas.filter((registro) =>
       registro.descricao.toLowerCase().includes(searchQuery.toLowerCase())
@@ -82,7 +97,7 @@ export default function ContaPage() {
     };
   }, [contas, searchQuery, currentPage]);
 
-  // Optimized handlers
+  // Operações de busca
   const handleSearch = useCallback((value: string) => {
     setSearchQuery(value);
     setCurrentPage(1);
@@ -101,6 +116,11 @@ export default function ContaPage() {
     const missingField = requiredFields.find((field) => !novoRegistro[field]);
     if (missingField) {
       alert(`Campo ${missingField} é obrigatório.`);
+      return;
+    }
+
+    if (novoRegistro.valor! < 0) {
+      alert("O valor não pode ser negativo.");
       return;
     }
 
@@ -132,7 +152,7 @@ export default function ContaPage() {
     [deleteConta, refetch]
   );
 
-  // Status badge renderer
+  // Status de tag de status
   const StatusBadge = ({ status }: { status: string }) => {
     const colors = {
       pendente: "bg-yellow-100 text-yellow-800",

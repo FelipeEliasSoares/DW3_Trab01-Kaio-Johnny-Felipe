@@ -1,3 +1,4 @@
+//* Importa o módulo de conexão com o BD
 const db = require("../../../database/databaseconfig");
 
 // Função para obter todas as contas

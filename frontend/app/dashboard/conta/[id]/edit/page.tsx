@@ -1,12 +1,21 @@
 "use client";
 
+//* Importa os hooks de roteamento e de busca de parâmetros da URL
 import { useRouter, useParams } from "next/navigation";
+
+//* Importa os hooks de busca de registro por ID
 import { useState, useEffect } from "react";
+
+//* Importa os hooks de busca de registro por ID e de atualização de registro
 import {
   useGetContaById,
   useUpdateConta,
 } from "../../../../../hooks/contas/useContas";
+
+//* Importa os tipos
 import { UpdateContaInput } from "../../../../../hooks/contas/types/types";
+
+//* Importa os componentes de UI
 import {
   Card,
   CardContent,
@@ -24,9 +33,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+//* Importa os ícones
 import { ArrowLeft, Save, AlertCircle } from "lucide-react";
 
-// Função auxiliar para formatar a data
+//* Função auxiliar para formatar a data
 const formatDateForInput = (isoDate: string) => {
   if (!isoDate) return "";
   return isoDate.split("T")[0];

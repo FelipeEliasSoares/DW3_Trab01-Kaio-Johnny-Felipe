@@ -1,7 +1,12 @@
 "use client";
 
+//* Importa os hooks de roteamento e de busca de parâmetros da URL
 import { useRouter, useParams } from "next/navigation";
+
+//* Importa os hooks de busca de registro por ID
 import { useGetContaById } from "../../../../../hooks/contas/useContas";
+
+//* Importa os componentes de UI
 import {
   Card,
   CardContent,
@@ -12,6 +17,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+//* Importa os ícones
 import {
   ArrowLeft,
   AlertCircle,
@@ -22,9 +29,10 @@ import {
   Tag,
   BadgeCheck,
 } from "lucide-react";
+
+//* Importa a função de formatação de data
 import { formatDateForDisplay } from "@/lib/utils";
 
-// Função helper para formatar moeda
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -39,7 +47,7 @@ export default function ViewRegistroPage() {
 
   const { conta: registro, loading, error } = useGetContaById(id);
 
-  // Loading state com skeleton
+  // Carregando state
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 p-6">

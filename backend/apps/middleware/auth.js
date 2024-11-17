@@ -1,4 +1,7 @@
+//* Arquivo de middleware para autenticação de rotas
 const jwt = require("jsonwebtoken");
+
+//* Importa o modelo de login
 const mdlLogin = require("../login/model/mdlLogin");
 
 const authMiddleware = async (req, res, next) => {

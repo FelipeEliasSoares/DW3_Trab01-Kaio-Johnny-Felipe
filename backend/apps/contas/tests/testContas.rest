@@ -30,7 +30,7 @@ content-type: application/json
     "data": "2024-11-13",
     "status": "Pendente",
     "forma_pagamento": "Cartão de crédito",
-    "usuario_id": "bcd2bf3e-a355-4d01-b320-8f35ca96f525"
+    "usuario_id": "e4acfa25-9943-40cf-8612-c97144e41bd8"
 
 }
 
