@@ -26,6 +26,7 @@ CREATE TABLE conta (
     status VARCHAR(50) NOT NULL,
     forma_pagamento VARCHAR(50) NOT NULL,
     usuario_id UUID NOT NULL, 
+    removido boolean DEFAULT false,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
